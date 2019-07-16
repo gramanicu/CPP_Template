@@ -43,9 +43,9 @@ OBJ = \$(SRC:.cpp=.o)
 
 # Compiles the program
 build: \$(OBJ)
-	$(info Compiling code...)
+	\$(info Compiling code...)
 	@\$(CC) -o \$(EXE) \$^ \$(CFLAGS) ||:
-	$(info Compilation successfull)
+	\$(info Compilation successfull)
 	-@rm -f *.o ||:
 	@\$(MAKE) -s gitignore ||:
 
@@ -80,7 +80,7 @@ gitignore:
 	
 # Creates an archive of the project
 pack:
-	zip -FSr \$(ANAME) *
+	zip -FSr $ANAME *
 
 EOF
 
