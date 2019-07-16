@@ -79,7 +79,7 @@ gitignore:
 	echo "Updated .gitignore"
 	
 # Creates an archive of the project
-pack:
+pack:clean
 	zip -FSr $ANAME *
 
 EOF
