@@ -58,7 +58,7 @@ run: build
 
 # Deletes the binary and object files
 clean:
-	rm -f \$(EXE) \$(OBJ)
+	rm -f \$(EXE) \$(OBJ) $ANAME
 	echo "Deleted the binary and object files"
 
 # Automatic coding style, in my personal style
