@@ -1,25 +1,25 @@
 #!/usr/bin/env bash
 
 if [ "$#" -eq 0 ]; then
-    SNAME="${PWD##*/}.c"  # source name
+    SNAME="${PWD##*/}.cpp"  # source name
     ENAME="${PWD##*/}"  # executable name
     ANAME="${PWD##*/}.zip"  # archive name
 fi
 
 if [ "$#" -eq 1 ]; then
-    SNAME="${1%.*}.c"  # source name
+    SNAME="${1%.*}.cpp"  # source name
     ENAME="${1%.*}"  # executable name
     ANAME="${PWD##*/}.zip"  # archive name
 fi
 
 if [ "$#" -eq 2 ]; then
-    SNAME="${1%.*}.c"  # source name
+    SNAME="${1%.*}.cpp"  # source name
     ENAME="${2%.*}"  # executable name
     ANAME="${1%.*}.zip"  # archive name
 fi
 
 if [ "$#" -ge 3 ]; then
-    SNAME="${1%.*}.c"  # source name
+    SNAME="${1%.*}.cpp"  # source name
     ENAME="${2%.*}"  # executable name
     ANAME="${3%.*}.zip"  # archive name
 fi
@@ -29,44 +29,54 @@ echo $ENAME
 echo $ANAME
 
 cat > Makefile << EOF
-# Copyright 2018 Grama Nicolae
+# Copyright 2019 Grama Nicolae
 
-CC = gcc
-CFLAGS = -lm -Wall -Wextra -std=c99
-EXE = $ENAME
-SOURCE = ${SNAME}
+.PHONY: gitignore clean memory beauty run
+.SILENT: beauty clean memory gitignore
 
-# Archive settings
-ANAME = ${ANAME}
-ACONTENTS = README Makefile *.c *.h
-AFLAGS = -FSr 
+# Compilation variables
+CC = g++
+CFLAGS = -Wno-unused-parameter -Wall -Wextra -pedantic -g -std=c++14
+EXE = main
+SRC = $(wildcard */*.cpp)
+OBJ = $(SRC:.cpp=.o)
 
-# Compile the program
-build: \$(SOURCE)
-		\$(CC) -o \$(EXE) \$^ \$(CFLAGS)
+# Compiles the program
+build: $(OBJ)
+	$(info Compiling code...)
+	@$(CC) -o $(EXE) $^ $(CFLAGS) ||:
+	$(info Compilation successfull)
+	-@rm -f *.o ||:
+	@$(MAKE) -s gitignore ||:
 
-# Build & run
+%.o: %.cpp
+	$(CC) -o $@ -c $< $(CFLAGS) 
+
+# Executes the binary
 run: build
-		./\$(EXE)
+	./$(EXE)
 
-# Archive the files
-pack:
-	zip \$(AFLAGS) \$(ANAME) \$(ACONTENTS) 
-	
-.PHONY:pack
-
-# Delete the executable
+# Deletes the binary and object files
 clean:
-	rm -f \$(EXE)
+	rm -f $(EXE) $(OBJ)
+	echo "Deleted the binary and object files"
 
-.PHONY:clean
+# Automatic coding style, in my personal style
+beauty-development:
+	clang-format -i -style=file */*.cpp
+	clang-format -i -style=file */*.h
 
-# Styles the code, with google's standard. The only difference is
-# that it uses 4 spaces instead of two for "tabs"
-beauty: 
-	clang-format -i -style=file *.c
+# Checks the memory for leaks
+MFLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
+memory:build
+	valgrind $(MFLAGS) ./$(EXE)
 
-.PHONY:beauty
+# Adds and updates gitignore rules
+gitignore:
+	@echo "$(EXE)" > .gitignore ||:
+	@echo "sources/*.o" >> .gitignore ||:
+	@echo ".vscode*" >> .gitignore ||:	
+	echo "Updated .gitignore"
 
 EOF
 
@@ -190,8 +200,10 @@ UseTab:          Never
 ...
 EOF
 
-cat > ${SNAME} << EOF
-#include <stdio.h>
+mkdir sources
+mkdir headers
+cat > sources/${SNAME} << EOF
+#include <iostream>
 
 int main() {
     
