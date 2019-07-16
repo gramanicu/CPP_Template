@@ -2,6 +2,9 @@
 
 This is a simple bash script (c++proj) that creates a cpp project template (.cpp file and a makefile with a .clang-format file, used to style the code)
 
+> **_NOTE:_** This is the continuation of another project (C_Template), updated for the C++ language
+---
+
 # Instalation
 1. Give the script execution permisions (if it doesn't have them) - `sudo chmod +x c++proj`
 2. Move the script into /usr/local/bin or ~/bin
