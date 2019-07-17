@@ -6,15 +6,12 @@ This is a simple bash script (c++proj) that creates a cpp project template (.cpp
 ---
 
 # Instalation
-1. Give the script execution permisions (if it doesn't have them) - `sudo chmod +x c++proj`
-2. Move the script into /usr/local/bin or ~/bin
-    - `sudo cp c++proj /usr/local/bin` - any user can use the script
-    - `cp c++proj ~/bin` - only the current user can use it
-    - if you haven't added the ~/bin directory to PATH (or it doesn't exist): 
-        1. `cd ~`
-        2. `mkdir bin`
-        3. `echo "PATH=/home/$USER/bin:$PATH" >> ~/.bashrc` - add the folder to path
-        4. `source ~/.bashrc` - to reload the terminal
+
+There are two ways to install this utility. You can install it for all users, using the `install.sh` script, or just for the current user, using `localInstal.sh` script.
+
+Run one of this commands
+- `./install.sh` - global installation
+- `./localInstall.sh` - local installation
 
 Now you should run the command from anywhere, using the `c++proj` command from the terminal
 
