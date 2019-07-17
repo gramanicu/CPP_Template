@@ -13,8 +13,9 @@ Run one of this commands
 - `./install.sh` - global installation
 - `./localInstall.sh` - local installation
 
-Now you should run the command from anywhere, using the `c++proj` command from the terminal
+Now you should run the command from anywhere, using the `c++proj` command from the terminal.
 
+> **_NOTE_** Everytime the script is run, it will try to get the latest version of the script from github. But, the changes will apply the next time the script is executed.
 
 # Run arguments
 - The script can use up to 3 arguments
@@ -65,7 +66,9 @@ archive.zip
 - **build** - compiles the program
 - **run** - compiles and executes the program
 - **pack** - creates an archive with all source files (*.cpp & *.h), README file and the Makefile
-- **clean** - deletes the executable
+- **clean** - deletes the executable and object files
 - **beauty** - styles the code, using the google standard (except the indentation, 4 spaces instead of 2)
+- **memory** - runs valgrind for the program, to check for memory leaks
+- **gitignore** - add/updates the gitignore rules
 
 © 2019 Grama Nicolae
