@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+rm -f c++proj
+wget -q --no-check-certificate --content-disposition https://raw.githubusercontent.com/gramanicu/CPP_Template/master/c%2B%2Bproj
+sudo chmod +x c++proj
+
 if [ "$#" -eq 0 ]; then
     SNAME="${PWD##*/}.cpp"  # source name
     ENAME="${PWD##*/}"  # executable name
@@ -204,8 +208,14 @@ UseTab:          Never
 ...
 EOF
 
-mkdir sources
-mkdir headers
+if [ ! -d "./sources/" ]; then
+  mkdir sources
+fi
+if [ ! -d "./headers/" ]; then
+  mkdir headers
+fi
+
+if [ ! -f "./sources/${SNAME}" ]; then
 cat > sources/${SNAME} << EOF
 #include <iostream>
 
@@ -215,3 +225,6 @@ int main() {
 }
 
 EOF
+
+fi
+
