@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # © 2019 Grama Nicolae
 
-wget -N -q -P /usr/local/bin/ --no-check-certificate --content-disposition https://raw.githubusercontent.com/gramanicu/CPP_Template/master/c%2B%2Bproj
+wget -N -q --no-check-certificate --content-disposition https://raw.githubusercontent.com/gramanicu/CPP_Template/master/c%2B%2Bproj -O /usr/local/bin/c++proj
 sudo chmod +x c++proj
 
 if [ "$#" -eq 0 ]; then
