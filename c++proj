@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
-# © 2019 Grama Nicolae
-
+# © 2020 Grama Nicolae
 
 wget -q --spider http://google.com
-
 if [ $? -eq 0 ]; then
     sudo wget -N -q --no-check-certificate --content-disposition https://raw.githubusercontent.com/gramanicu/CPP_Template/master/c%2B%2Bproj -O /usr/local/bin/c++proj
     sudo chmod +x /usr/local/bin/c++proj
