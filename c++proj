@@ -82,7 +82,7 @@ memory:clean build
 # Adds and updates gitignore rules
 gitignore:
 	@echo "\$(EXE)" > .gitignore ||:
-	@echo "sources/*.o" >> .gitignore ||:
+	@echo "src/*.o" >> .gitignore ||:
 	@echo ".vscode*" >> .gitignore ||:	
 	echo "Updated .gitignore"
 	
@@ -251,7 +251,7 @@ if [ ! -d "./src/" ]; then
 fi
 
 if [ ! -f "./src/${SNAME}" ]; then
-cat > sources/${SNAME} << EOF
+cat > src/${SNAME} << EOF
 #include <iostream>
 
 int main() {
